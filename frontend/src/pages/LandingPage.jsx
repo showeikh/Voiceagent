@@ -141,30 +141,30 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 px-6 bg-slate-50/50">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-50/50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
               Alles was Sie brauchen
             </h2>
-            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
               Ein vollständiges Ökosystem für intelligente Terminverwaltung per Sprache
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-white rounded-2xl p-6 border border-slate-100 shadow-soft hover-lift"
+                className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-100 shadow-soft hover-lift"
               >
-                <div className="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mb-4">
-                  <feature.icon className="w-6 h-6 text-violet-600" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-violet-100 flex items-center justify-center mb-3 sm:mb-4">
+                  <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-violet-600" />
                 </div>
-                <h3 className="font-heading font-semibold text-lg text-slate-900 mb-2">
+                <h3 className="font-heading font-semibold text-base sm:text-lg text-slate-900 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
                   {feature.description}
                 </p>
               </div>
