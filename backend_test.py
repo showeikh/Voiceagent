@@ -369,13 +369,106 @@ class VoiceAgentAPITester:
         
         return success1
 
-    def test_conversation_history(self):
-        """Test conversation history"""
-        if not self.token:
-            self.log_result("Conversation History", False, "No token available")
+    def test_admin_operations(self):
+        """Test Super Admin operations"""
+        if not self.admin_token:
+            self.log_result("Admin Operations", False, "No admin token available")
             return False
             
-        return self.run_test("Get Conversations", "GET", "conversations", 200)[0]
+        # Get admin stats
+        success1, _ = self.run_test("Get Admin Stats", "GET", "admin/stats", 200, use_admin_token=True)
+        
+        # Get all tenants
+        success2, tenants_response = self.run_test("Get All Tenants", "GET", "admin/tenants", 200, use_admin_token=True)
+        
+        # Get pending tenants
+        success3, _ = self.run_test("Get Pending Tenants", "GET", "admin/tenants?status=pending", 200, use_admin_token=True)
+        
+        # Get pricing plans
+        success4, _ = self.run_test("Get Pricing Plans", "GET", "admin/pricing-plans", 200, use_admin_token=True)
+        
+        # Get minute packages
+        success5, _ = self.run_test("Get Minute Packages", "GET", "admin/minute-packages", 200, use_admin_token=True)
+        
+        # Test tenant approval if we have a pending tenant
+        if success2 and tenants_response and len(tenants_response) > 0:
+            # Find a pending tenant
+            pending_tenant = None
+            for tenant in tenants_response:
+                if tenant.get('status') == 'pending':
+                    pending_tenant = tenant
+                    break
+            
+            if pending_tenant:
+                # Approve the tenant
+                success6, _ = self.run_test(
+                    "Approve Tenant", 
+                    "POST", 
+                    f"admin/tenants/{pending_tenant['id']}/approve", 
+                    200, 
+                    use_admin_token=True
+                )
+                return success1 and success2 and success3 and success4 and success5 and success6
+        
+        return success1 and success2 and success3 and success4 and success5
+
+    def test_pricing_management(self):
+        """Test pricing plan management"""
+        if not self.admin_token:
+            self.log_result("Pricing Management", False, "No admin token available")
+            return False
+            
+        # Create a new pricing plan
+        plan_data = {
+            "name": f"Test Plan {datetime.now().strftime('%H%M%S')}",
+            "price_per_minute": 0.20,
+            "monthly_fee": 50.0,
+            "included_minutes": 200,
+            "description": "Test pricing plan",
+            "is_active": True
+        }
+        
+        success1, response = self.run_test(
+            "Create Pricing Plan",
+            "POST",
+            "admin/pricing-plans",
+            200,
+            data=plan_data,
+            use_admin_token=True
+        )
+        
+        plan_id = None
+        if success1 and 'id' in response:
+            plan_id = response['id']
+        
+        # Update the plan
+        success2 = True
+        if plan_id:
+            updated_plan_data = {
+                **plan_data,
+                "price_per_minute": 0.25
+            }
+            success2, _ = self.run_test(
+                "Update Pricing Plan",
+                "PUT",
+                f"admin/pricing-plans/{plan_id}",
+                200,
+                data=updated_plan_data,
+                use_admin_token=True
+            )
+        
+        # Delete the plan
+        success3 = True
+        if plan_id:
+            success3, _ = self.run_test(
+                "Delete Pricing Plan",
+                "DELETE",
+                f"admin/pricing-plans/{plan_id}",
+                200,
+                use_admin_token=True
+            )
+        
+        return success1 and success2 and success3
 
     def run_all_tests(self):
         """Run all API tests"""
