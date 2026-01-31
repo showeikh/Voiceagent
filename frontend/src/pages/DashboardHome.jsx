@@ -304,11 +304,11 @@ const DashboardHome = () => {
       </Card>
 
       {/* Quick Tips */}
-      <Card className="p-6 bg-white border border-slate-100 shadow-soft">
-        <h3 className="font-heading font-semibold text-slate-900 mb-4">
+      <Card className="p-4 sm:p-6 bg-white border border-slate-100 shadow-soft">
+        <h3 className="font-heading font-semibold text-slate-900 mb-3 sm:mb-4 text-sm sm:text-base">
           Beispiel-Befehle
         </h3>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           {[
             '"Was sind meine Termine heute?"',
             '"Erstelle einen Termin morgen um 14 Uhr"',
