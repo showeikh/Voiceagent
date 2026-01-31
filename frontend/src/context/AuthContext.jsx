@@ -17,6 +17,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  const [tenantStatus, setTenantStatus] = useState('approved');
 
   const getAuthHeaders = useCallback(() => {
     return token ? { Authorization: `Bearer ${token}` } : {};
@@ -33,11 +35,14 @@ export const AuthProvider = ({ children }) => {
         headers: getAuthHeaders()
       });
       setUser(response.data);
+      setIsSuperAdmin(response.data.is_super_admin || false);
+      setTenantStatus(response.data.tenant_status || 'approved');
     } catch (error) {
       console.error('Failed to fetch user:', error);
       localStorage.removeItem('token');
       setToken(null);
       setUser(null);
+      setIsSuperAdmin(false);
     } finally {
       setLoading(false);
     }
@@ -53,26 +58,18 @@ export const AuthProvider = ({ children }) => {
       password
     });
     
-    const { access_token, user_id, tenant_id, username } = response.data;
+    const { access_token, user_id, tenant_id, username, is_super_admin, tenant_status: status } = response.data;
     localStorage.setItem('token', access_token);
     setToken(access_token);
     setUser({ id: user_id, tenant_id, username, email });
+    setIsSuperAdmin(is_super_admin || false);
+    setTenantStatus(status || 'approved');
     
     return response.data;
   };
 
-  const register = async (name, email, password) => {
-    const response = await axios.post(`${API_URL}/auth/register`, {
-      name,
-      email,
-      password
-    });
-    
-    const { access_token, user_id, tenant_id, username } = response.data;
-    localStorage.setItem('token', access_token);
-    setToken(access_token);
-    setUser({ id: user_id, tenant_id, username, email });
-    
+  const register = async (data) => {
+    const response = await axios.post(`${API_URL}/auth/register`, data);
     return response.data;
   };
 
@@ -80,6 +77,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setToken(null);
     setUser(null);
+    setIsSuperAdmin(false);
+    setTenantStatus('approved');
   };
 
   const value = {
@@ -87,6 +86,8 @@ export const AuthProvider = ({ children }) => {
     token,
     loading,
     isAuthenticated: !!token && !!user,
+    isSuperAdmin,
+    tenantStatus,
     login,
     register,
     logout,
