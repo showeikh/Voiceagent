@@ -5,10 +5,10 @@ import { Helmet } from 'react-helmet-async';
 
 const LandingPage = () => {
   const benefits = [
-    'Nie wieder verpasste Anrufe',
-    '24/7 Terminbuchung für Ihre Kunden',
-    'Automatische Kalender-Synchronisation',
-    'Deutsch und mehrsprachiger Support'
+    'Mehrsprachig: Deutsch, Englisch, Türkisch & mehr',
+    '24/7 erreichbar – 365 Tage im Jahr',
+    'Termine automatisch auf Deutsch im Kalender',
+    'Nahtlose Kalender-Synchronisation'
   ];
 
   const industries = [
@@ -41,18 +41,18 @@ const LandingPage = () => {
   const features = [
     {
       icon: Phone,
-      title: 'KI-Telefonassistent',
-      description: 'Nimmt Anrufe entgegen, beantwortet Fragen und vereinbart Termine – wie eine echte Mitarbeiterin.'
+      title: 'Mehrsprachiger KI-Assistent',
+      description: 'Nimmt Anrufe auf Deutsch, Englisch, Türkisch, Polnisch, Russisch und vielen weiteren Sprachen entgegen.'
     },
     {
       icon: Calendar,
-      title: 'Kalender-Integration',
-      description: 'Verbindet sich mit Google Calendar und Microsoft 365. Termine werden automatisch eingetragen.'
+      title: 'Deutsche Kalendereinträge',
+      description: 'Egal in welcher Sprache der Anruf – alle Termine werden einheitlich auf Deutsch im Kalender gespeichert.'
     },
     {
       icon: Clock,
-      title: '24/7 Erreichbarkeit',
-      description: 'Ihre Kunden können jederzeit anrufen – auch nachts, am Wochenende und an Feiertagen.'
+      title: '24/7 – 365 Tage im Jahr',
+      description: 'Rund um die Uhr erreichbar. Nachts, am Wochenende, an Feiertagen – Ihre Kunden erreichen Sie immer.'
     },
     {
       icon: Shield,
