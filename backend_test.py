@@ -295,46 +295,15 @@ class VoiceAgentAPITester:
         return success1 and success2
 
     def test_calendar_operations(self):
-        """Test calendar operations"""
+        """Test calendar operations (for pending tenant - should fail)"""
         if not self.token:
             self.log_result("Calendar Operations", False, "No token available")
             return False
             
-        # Get calendars (should be empty initially)
-        success1, _ = self.run_test("Get Calendars", "GET", "calendars", 200)
+        # These should fail because tenant is pending
+        success1, _ = self.run_test("Get Calendars (Pending)", "GET", "calendars", 403)
         
-        # Add calendar connection
-        calendar_data = {
-            "provider": "google",
-            "email": "test@gmail.com",
-            "access_token": "fake_access_token_for_testing",
-            "refresh_token": "fake_refresh_token",
-            "expires_at": (datetime.now() + timedelta(hours=1)).isoformat()
-        }
-        
-        success2, response = self.run_test(
-            "Add Calendar Connection",
-            "POST",
-            "calendars",
-            200,
-            data=calendar_data
-        )
-        
-        calendar_id = None
-        if success2 and 'id' in response:
-            calendar_id = response['id']
-        
-        # Delete calendar connection
-        success3 = True
-        if calendar_id:
-            success3, _ = self.run_test(
-                "Delete Calendar Connection",
-                "DELETE",
-                f"calendars/{calendar_id}",
-                200
-            )
-        
-        return success1 and success2 and success3
+        return success1
 
     def test_appointment_operations(self):
         """Test appointment operations"""
