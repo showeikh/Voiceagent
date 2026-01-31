@@ -200,15 +200,83 @@ class VoiceAgentAPITester:
         # Get tenant info
         success1, _ = self.run_test("Get Tenant Info", "GET", "tenant", 200)
         
-        # Update tenant name
-        success2, _ = self.run_test(
-            "Update Tenant", 
-            "PUT", 
-            "tenant?name=Updated%20Tenant%20Name", 
-            200
+        # Note: There's no PUT endpoint for updating tenant info in the current API
+        # This is expected behavior - tenant info is managed through admin panel
+        
+        return success1
+
+    def test_approved_tenant_operations(self):
+        """Test operations after tenant approval"""
+        if not self.token or not self.admin_token or not self.tenant_id:
+            self.log_result("Approved Tenant Operations", False, "Missing tokens or tenant ID")
+            return False
+            
+        # First approve the tenant using admin token
+        success_approve, _ = self.run_test(
+            "Approve Current Tenant", 
+            "POST", 
+            f"admin/tenants/{self.tenant_id}/approve", 
+            200,
+            use_admin_token=True
         )
         
-        return success1 and success2
+        if not success_approve:
+            return False
+        
+        # Now test tenant operations that require approval
+        success1, _ = self.run_test("Get Users (Approved)", "GET", "users", 200)
+        
+        # Create new user (should work since we have max 2 users)
+        user_data = {
+            "email": f"user2_{datetime.now().strftime('%H%M%S')}@example.com",
+            "username": f"User Two {datetime.now().strftime('%H%M%S')}",
+            "password": "UserPass123!"
+        }
+        
+        success2, response = self.run_test(
+            "Create User (Approved)",
+            "POST",
+            "users",
+            200,
+            data=user_data
+        )
+        
+        new_user_id = None
+        if success2 and 'id' in response:
+            new_user_id = response['id']
+        
+        # Test calendar operations
+        success3, _ = self.run_test("Get Calendars (Approved)", "GET", "calendars", 200)
+        
+        # Test appointments
+        success4, _ = self.run_test("Get Appointments (Approved)", "GET", "appointments", 200)
+        
+        # Test voice operations
+        voice_data = {
+            "transcription": "Was sind meine Termine heute?"
+        }
+        success5, _ = self.run_test(
+            "Process Voice Input (Approved)",
+            "POST",
+            "voice/process",
+            200,
+            data=voice_data
+        )
+        
+        # Test conversation history
+        success6, _ = self.run_test("Get Conversations (Approved)", "GET", "conversations", 200)
+        
+        # Clean up - delete the created user
+        success7 = True
+        if new_user_id:
+            success7, _ = self.run_test(
+                "Delete Created User",
+                "DELETE",
+                f"users/{new_user_id}",
+                200
+            )
+        
+        return success1 and success2 and success3 and success4 and success5 and success6 and success7
 
     def test_user_management(self):
         """Test user management operations"""
