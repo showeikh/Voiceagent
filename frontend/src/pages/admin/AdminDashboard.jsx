@@ -92,11 +92,11 @@ const AdminDashboard = () => {
       </div>
 
       {/* Quick Actions */}
-      <Card className="p-6 bg-slate-900 border border-slate-800">
-        <h2 className="font-heading text-lg font-semibold text-white mb-4">
+      <Card className="p-4 sm:p-6 bg-slate-900 border border-slate-800">
+        <h2 className="font-heading text-base sm:text-lg font-semibold text-white mb-4">
           Schnellzugriff
         </h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           <a href="/admin/tenants?status=pending" className="p-4 bg-slate-800 rounded-xl hover:bg-slate-700 transition-colors">
             <Clock className="w-6 h-6 text-amber-400 mb-2" />
             <p className="font-medium text-white">Ausstehende Freischaltungen</p>
