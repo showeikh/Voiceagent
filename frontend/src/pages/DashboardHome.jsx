@@ -184,7 +184,7 @@ const DashboardHome = () => {
       {/* Voice Agent Interface */}
       <Card className="bg-white border border-slate-100 shadow-soft overflow-hidden" data-testid="voice-agent-card">
         {/* Voice Agent Header */}
-        <div className="relative p-8 pb-12 bg-gradient-to-br from-violet-600 to-indigo-600">
+        <div className="relative p-4 sm:p-6 md:p-8 pb-10 sm:pb-12 bg-gradient-to-br from-violet-600 to-indigo-600">
           <div className="absolute inset-0 opacity-20">
             <img 
               src="https://images.unsplash.com/photo-1759771963975-8a4885446f1f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMHNvdW5kJTIwd2F2ZSUyMHRlY2hub2xvZ3klMjBibHVlJTIwdmlvbGV0fGVufDB8fHx8MTc2OTgyNjAxOHww&ixlib=rb-4.1.0&q=85"
@@ -193,17 +193,17 @@ const DashboardHome = () => {
             />
           </div>
           <div className="relative z-10">
-            <h2 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">
+            <h2 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">
               KI-Sprachassistent
             </h2>
-            <p className="text-violet-100">
+            <p className="text-violet-100 text-sm sm:text-base">
               Drücken Sie den Knopf und sprechen Sie Ihren Befehl
             </p>
           </div>
         </div>
 
         {/* Recording Interface */}
-        <div className="p-8 -mt-8 relative z-10">
+        <div className="p-4 sm:p-6 md:p-8 -mt-6 sm:-mt-8 relative z-10">
           <div className="flex flex-col items-center">
             {/* Record Button */}
             <div className="relative">
