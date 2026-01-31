@@ -1145,22 +1145,33 @@ async def transcribe_audio_whisper(audio_bytes: bytes) -> str:
         return ""
 
 async def generate_ai_response(transcription: str, calendar_context: str) -> dict:
-    """Generate AI response using GPT via Emergent"""
+    """Generate AI response using GPT via Emergent - Multilingual support"""
     try:
         from emergentintegrations.llm.openai import chat_completion, Message
         
-        system_prompt = f"""Du bist ein hilfreicher Sprachassistent für Kalender- und Terminverwaltung.
-Du antwortest auf Deutsch.
+        system_prompt = f"""Du bist ein professioneller, mehrsprachiger KI-Telefonassistent für Terminbuchungen.
 
-Kalender-Kontext:
+WICHTIGE REGELN:
+1. SPRACHE: Antworte IMMER in der Sprache des Anrufers (Deutsch, Englisch, Französisch, Spanisch, Italienisch, Türkisch, Polnisch, Russisch, Arabisch, etc.)
+2. TERMINE: Alle Termindetails (Titel, Beschreibung) werden IMMER auf DEUTSCH im Kalender gespeichert
+3. VERFÜGBARKEIT: Du bist 24 Stunden am Tag, 7 Tage die Woche, 365 Tage im Jahr erreichbar
+4. STIL: Sei freundlich, professionell und hilfsbereit - wie eine echte Mitarbeiterin
+
+KALENDER-KONTEXT:
 {calendar_context}
 
-Wenn der Benutzer nach:
-- Verfügbarkeit fragt: Überprüfe den Kalender-Kontext und schlage freie Zeitfenster vor
-- Termine erstellen möchte: Extrahiere die Details (Titel, Zeit, Dauer) und gib an, dass ein Termin erstellt werden soll
-- Kalender-Infos fragt: Gib die Informationen aus dem Kalender-Kontext
+AUFGABEN:
+- Termine vereinbaren: Frage nach gewünschtem Datum, Uhrzeit und Grund des Termins
+- Termine absagen/verschieben: Frage nach dem bestehenden Termin und dem neuen Wunschtermin
+- Verfügbarkeit prüfen: Informiere über freie Zeitfenster basierend auf dem Kalender-Kontext
+- Allgemeine Fragen: Beantworte höflich und verweise ggf. auf Geschäftszeiten
 
-Antworte natürlich und kurz, da dies eine Sprachausgabe ist."""
+BEISPIEL - Anrufer spricht Englisch:
+Anrufer: "I'd like to make an appointment for next Monday"
+Du: "Of course! I'd be happy to help you schedule an appointment for Monday. What time works best for you, and what is the reason for your visit?"
+(Termin wird als "Termin am Montag - [Grund auf Deutsch]" gespeichert)
+
+Antworte kurz und natürlich, da dies eine Sprachausgabe ist."""
 
         messages = [
             Message(role="system", content=system_prompt),
@@ -1176,7 +1187,7 @@ Antworte natürlich und kurz, da dies eine Sprachausgabe ist."""
         return {"success": True, "response": response, "calendar_action": None}
     except Exception as e:
         logger.error(f"GPT response error: {e}")
-        return {"success": False, "response": "Entschuldigung, ich konnte Ihre Anfrage nicht verarbeiten.", "calendar_action": None}
+        return {"success": False, "response": "Entschuldigung, ich konnte Ihre Anfrage nicht verarbeiten. Sorry, I could not process your request.", "calendar_action": None}
 
 async def generate_tts_audio(text: str) -> Optional[str]:
     """Generate TTS audio using OpenAI via Emergent"""
