@@ -32,12 +32,15 @@ class VoiceAgentAPITester:
             "details": details
         })
 
-    def run_test(self, name, method, endpoint, expected_status, data=None, files=None):
+    def run_test(self, name, method, endpoint, expected_status, data=None, files=None, use_admin_token=False):
         """Run a single API test"""
         url = f"{self.base_url}/{endpoint}"
         headers = {'Content-Type': 'application/json'}
-        if self.token:
-            headers['Authorization'] = f'Bearer {self.token}'
+        
+        # Choose token based on test type
+        token_to_use = self.admin_token if use_admin_token else self.token
+        if token_to_use:
+            headers['Authorization'] = f'Bearer {token_to_use}'
         
         if files:
             # Remove Content-Type for file uploads
