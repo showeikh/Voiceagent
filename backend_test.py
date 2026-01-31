@@ -317,21 +317,21 @@ class VoiceAgentAPITester:
         return success1
 
     def test_voice_operations(self):
-        """Test voice operations (without actual audio)"""
+        """Test voice operations (for pending tenant - should fail)"""
         if not self.token:
             self.log_result("Voice Operations", False, "No token available")
             return False
             
-        # Test voice processing with text input
+        # This should fail because tenant is pending
         voice_data = {
             "transcription": "Was sind meine Termine heute?"
         }
         
         success1, _ = self.run_test(
-            "Process Voice Input",
+            "Process Voice Input (Pending)",
             "POST",
             "voice/process",
-            200,
+            403,
             data=voice_data
         )
         
