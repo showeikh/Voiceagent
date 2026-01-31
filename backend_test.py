@@ -87,10 +87,20 @@ class VoiceAgentAPITester:
 
     def test_register_tenant(self):
         """Test tenant registration"""
+        timestamp = datetime.now().strftime('%H%M%S')
         test_data = {
-            "name": f"Test Tenant {datetime.now().strftime('%H%M%S')}",
-            "email": f"test{datetime.now().strftime('%H%M%S')}@example.com",
-            "password": "TestPass123!"
+            "company_name": f"Test Company {timestamp}",
+            "contact_person": f"Test Person {timestamp}",
+            "email": f"test{timestamp}@example.com",
+            "password": "TestPass123!",
+            "phone": "+49 30 12345678",
+            "street": "Teststraße",
+            "house_number": "123",
+            "postal_code": "12345",
+            "city": "Berlin",
+            "country": "Deutschland",
+            "tax_number": "123/456/78901",
+            "vat_id": "DE123456789"
         }
         
         success, response = self.run_test(
@@ -101,11 +111,9 @@ class VoiceAgentAPITester:
             data=test_data
         )
         
-        if success and 'access_token' in response:
-            self.token = response['access_token']
+        if success and 'tenant_id' in response:
             self.tenant_id = response['tenant_id']
-            self.user_id = response['user_id']
-            print(f"   Token obtained: {self.token[:20]}...")
+            print(f"   Tenant registered: {self.tenant_id}")
             return True
         return False
 
