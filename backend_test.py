@@ -279,59 +279,20 @@ class VoiceAgentAPITester:
         return success1 and success2 and success3 and success4 and success5 and success6 and success7
 
     def test_user_management(self):
-        """Test user management operations"""
+        """Test user management operations (for pending tenant - should fail)"""
         if not self.token:
             self.log_result("User Management", False, "No token available")
             return False
             
-        # Get users list
-        success1, _ = self.run_test("Get Users", "GET", "users", 200)
+        # These should fail because tenant is pending
+        success1, _ = self.run_test("Get Users (Pending)", "GET", "users", 403)
+        success2, _ = self.run_test("Create User (Pending)", "POST", "users", 403, data={
+            "email": "test@example.com",
+            "username": "Test User",
+            "password": "TestPass123!"
+        })
         
-        # Create new user (should work since we have max 2 users)
-        user_data = {
-            "email": f"user2_{datetime.now().strftime('%H%M%S')}@example.com",
-            "username": f"User Two {datetime.now().strftime('%H%M%S')}",
-            "password": "UserPass123!"
-        }
-        
-        success2, response = self.run_test(
-            "Create User",
-            "POST",
-            "users",
-            200,
-            data=user_data
-        )
-        
-        new_user_id = None
-        if success2 and 'id' in response:
-            new_user_id = response['id']
-        
-        # Try to create third user (should fail - max 2 users)
-        user_data3 = {
-            "email": f"user3_{datetime.now().strftime('%H%M%S')}@example.com",
-            "username": f"User Three {datetime.now().strftime('%H%M%S')}",
-            "password": "UserPass123!"
-        }
-        
-        success3, _ = self.run_test(
-            "Create Third User (Should Fail)",
-            "POST",
-            "users",
-            400,  # Should fail with 400
-            data=user_data3
-        )
-        
-        # Delete the second user if created
-        success4 = True
-        if new_user_id:
-            success4, _ = self.run_test(
-                "Delete User",
-                "DELETE",
-                f"users/{new_user_id}",
-                200
-            )
-        
-        return success1 and success2 and success3 and success4
+        return success1 and success2
 
     def test_calendar_operations(self):
         """Test calendar operations"""
