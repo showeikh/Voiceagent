@@ -438,12 +438,13 @@ class VoiceAgentAPITester:
         
         return success1 and success2 and success3
     def test_conversation_history(self):
-        """Test conversation history"""
+        """Test conversation history (for pending tenant - should fail)"""
         if not self.token:
             self.log_result("Conversation History", False, "No token available")
             return False
             
-        return self.run_test("Get Conversations", "GET", "conversations", 200)[0]
+        # This should fail because tenant is pending
+        return self.run_test("Get Conversations (Pending)", "GET", "conversations", 403)[0]
 
     def test_tenant_usage_and_invoicing(self):
         """Test tenant usage tracking and invoice generation"""
