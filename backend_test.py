@@ -118,25 +118,57 @@ class VoiceAgentAPITester:
         return False
 
     def test_login(self):
-        """Test login with existing credentials"""
-        # First register a user
+        """Test login with registered tenant"""
+        timestamp = datetime.now().strftime('%H%M%S')
+        
+        # First register a tenant
         if not self.test_register_tenant():
             return False
             
         # Now test login with same credentials
         login_data = {
-            "email": f"test{datetime.now().strftime('%H%M%S')}@example.com",
+            "email": f"test{timestamp}@example.com",
             "password": "TestPass123!"
         }
         
         success, response = self.run_test(
-            "Login",
+            "Login Regular User",
             "POST", 
             "auth/login",
             200,
             data=login_data
         )
-        return success
+        
+        if success and 'access_token' in response:
+            self.token = response['access_token']
+            self.tenant_id = response['tenant_id']
+            self.user_id = response['user_id']
+            print(f"   Token obtained: {self.token[:20]}...")
+            print(f"   Tenant status: {response.get('tenant_status', 'unknown')}")
+            return True
+        return False
+
+    def test_super_admin_login(self):
+        """Test Super Admin login"""
+        login_data = {
+            "email": "admin@voiceagent.de",
+            "password": "admin123"
+        }
+        
+        success, response = self.run_test(
+            "Super Admin Login",
+            "POST", 
+            "auth/login",
+            200,
+            data=login_data
+        )
+        
+        if success and 'access_token' in response:
+            self.admin_token = response['access_token']
+            print(f"   Admin token obtained: {self.admin_token[:20]}...")
+            print(f"   Is super admin: {response.get('is_super_admin', False)}")
+            return True
+        return False
 
     def test_get_current_user(self):
         """Test get current user info"""
