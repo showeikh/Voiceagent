@@ -306,46 +306,15 @@ class VoiceAgentAPITester:
         return success1
 
     def test_appointment_operations(self):
-        """Test appointment operations"""
+        """Test appointment operations (for pending tenant - should fail)"""
         if not self.token:
             self.log_result("Appointment Operations", False, "No token available")
             return False
             
-        # Get appointments (should be empty initially)
-        success1, _ = self.run_test("Get Appointments", "GET", "appointments", 200)
+        # These should fail because tenant is pending
+        success1, _ = self.run_test("Get Appointments (Pending)", "GET", "appointments", 403)
         
-        # Create appointment
-        appointment_data = {
-            "title": "Test Meeting",
-            "description": "Test appointment description",
-            "start_time": (datetime.now() + timedelta(hours=1)).isoformat(),
-            "end_time": (datetime.now() + timedelta(hours=2)).isoformat(),
-            "calendar_provider": "local"
-        }
-        
-        success2, response = self.run_test(
-            "Create Appointment",
-            "POST",
-            "appointments",
-            200,
-            data=appointment_data
-        )
-        
-        appointment_id = None
-        if success2 and 'id' in response:
-            appointment_id = response['id']
-        
-        # Delete appointment
-        success3 = True
-        if appointment_id:
-            success3, _ = self.run_test(
-                "Delete Appointment",
-                "DELETE",
-                f"appointments/{appointment_id}",
-                200
-            )
-        
-        return success1 and success2 and success3
+        return success1
 
     def test_voice_operations(self):
         """Test voice operations (without actual audio)"""
