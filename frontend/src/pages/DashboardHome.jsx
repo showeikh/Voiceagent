@@ -214,7 +214,7 @@ const DashboardHome = () => {
                 onClick={isRecording ? stopRecording : startRecording}
                 disabled={isProcessing}
                 className={`
-                  w-24 h-24 rounded-full flex items-center justify-center transition-all
+                  w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center transition-all
                   ${isRecording 
                     ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/30' 
                     : 'bg-violet-600 hover:bg-violet-700 shadow-glow'
@@ -224,11 +224,11 @@ const DashboardHome = () => {
                 data-testid="record-btn"
               >
                 {isProcessing ? (
-                  <Loader2 className="w-10 h-10 text-white animate-spin" />
+                  <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 text-white animate-spin" />
                 ) : isRecording ? (
-                  <Square className="w-10 h-10 text-white" />
+                  <Square className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 ) : (
-                  <Mic className="w-10 h-10 text-white" />
+                  <Mic className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 )}
               </button>
             </div>
