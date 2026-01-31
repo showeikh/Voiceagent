@@ -10,6 +10,7 @@ class VoiceAgentAPITester:
     def __init__(self, base_url="https://calendar-voice-3.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.token = None
+        self.admin_token = None
         self.tenant_id = None
         self.user_id = None
         self.tests_run = 0
