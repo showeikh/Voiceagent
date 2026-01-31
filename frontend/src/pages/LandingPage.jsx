@@ -37,22 +37,23 @@ const LandingPage = () => {
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-slate-200/50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl gradient-voice flex items-center justify-center">
-              <Mic className="w-5 h-5 text-white" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl gradient-voice flex items-center justify-center">
+              <Mic className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <span className="font-heading font-bold text-xl text-foreground">VoiceAgent</span>
+            <span className="font-heading font-bold text-lg sm:text-xl text-foreground">VoiceAgent</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link to="/login">
-              <Button variant="ghost" className="text-slate-600 hover:text-slate-900" data-testid="nav-login-btn">
+              <Button variant="ghost" className="text-slate-600 hover:text-slate-900 text-sm sm:text-base px-2 sm:px-4" data-testid="nav-login-btn">
                 Anmelden
               </Button>
             </Link>
             <Link to="/register">
-              <Button className="bg-violet-600 hover:bg-violet-700 text-white rounded-full px-6 shadow-glow" data-testid="nav-register-btn">
-                Kostenlos starten
+              <Button className="bg-violet-600 hover:bg-violet-700 text-white rounded-full px-3 sm:px-6 text-sm sm:text-base shadow-glow" data-testid="nav-register-btn">
+                <span className="hidden sm:inline">Kostenlos starten</span>
+                <span className="sm:hidden">Start</span>
               </Button>
             </Link>
           </div>
@@ -60,41 +61,41 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 gradient-hero">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 gradient-hero">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 text-violet-700 rounded-full text-sm font-medium">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div className="space-y-6 sm:space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-violet-100 text-violet-700 rounded-full text-xs sm:text-sm font-medium">
                 <span className="w-2 h-2 bg-violet-500 rounded-full animate-pulse" />
                 KI-gestützte Terminverwaltung
               </div>
               
-              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight">
+              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight">
                 Termine verwalten mit
                 <span className="text-violet-600"> Ihrer Stimme</span>
               </h1>
               
-              <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-lg">
                 Der intelligente Sprachassistent für Ihre Kalender. Verbinden Sie Google Calendar und Office 365 
                 und verwalten Sie Termine einfach per Sprache.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link to="/register">
                   <Button 
                     size="lg" 
-                    className="bg-violet-600 hover:bg-violet-700 text-white rounded-full px-8 h-14 text-lg shadow-glow hover:shadow-glow-lg transition-all hover:scale-105"
+                    className="w-full sm:w-auto bg-violet-600 hover:bg-violet-700 text-white rounded-full px-6 sm:px-8 h-12 sm:h-14 text-base sm:text-lg shadow-glow hover:shadow-glow-lg transition-all hover:scale-105"
                     data-testid="hero-cta-btn"
                   >
                     Jetzt starten
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                   </Button>
                 </Link>
                 <Link to="/login">
                   <Button 
                     variant="outline" 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg border-slate-300 hover:bg-slate-50"
+                    className="w-full sm:w-auto rounded-full px-6 sm:px-8 h-12 sm:h-14 text-base sm:text-lg border-slate-300 hover:bg-slate-50"
                     data-testid="hero-login-btn"
                   >
                     Anmelden
