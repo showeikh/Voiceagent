@@ -105,7 +105,7 @@ const AdminLayout = () => {
             </div>
             <div>
               <span className="font-heading font-bold text-lg text-white">Admin Panel</span>
-              <p className="text-xs text-slate-500">VoiceAgent SaaS</p>
+              <p className="text-xs text-slate-500">BuchungsButler SaaS</p>
             </div>
           </div>
         </div>

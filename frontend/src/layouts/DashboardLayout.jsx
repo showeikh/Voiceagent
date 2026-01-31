@@ -76,7 +76,7 @@ const DashboardLayout = () => {
               <div className="w-8 h-8 rounded-lg gradient-voice flex items-center justify-center">
                 <Mic className="w-4 h-4 text-white" />
               </div>
-              <span className="font-heading font-bold text-slate-900">VoiceAgent</span>
+              <span className="font-heading font-bold text-slate-900">BuchungsButler</span>
             </div>
           </div>
           
@@ -122,7 +122,7 @@ const DashboardLayout = () => {
               <Mic className="w-5 h-5 text-white" />
             </div>
             <div>
-              <span className="font-heading font-bold text-lg text-slate-900">VoiceAgent</span>
+              <span className="font-heading font-bold text-lg text-slate-900">BuchungsButler</span>
               <p className="text-xs text-slate-500">Sprachgesteuerte Termine</p>
             </div>
           </div>

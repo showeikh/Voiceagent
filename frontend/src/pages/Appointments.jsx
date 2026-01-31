@@ -267,7 +267,7 @@ const Appointments = () => {
                     <SelectValue placeholder="Kalender wählen" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="local">Lokal (VoiceAgent)</SelectItem>
+                    <SelectItem value="local">Lokal (BuchungsButler)</SelectItem>
                     <SelectItem value="google">Google Calendar</SelectItem>
                     <SelectItem value="microsoft">Microsoft Office 365</SelectItem>
                   </SelectContent>

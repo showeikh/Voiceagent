@@ -42,7 +42,7 @@ const LandingPage = () => {
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl gradient-voice flex items-center justify-center">
               <Mic className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <span className="font-heading font-bold text-lg sm:text-xl text-foreground">VoiceAgent</span>
+            <span className="font-heading font-bold text-lg sm:text-xl text-foreground">BuchungsButler</span>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
             <Link to="/login">
@@ -207,10 +207,10 @@ const LandingPage = () => {
             <div className="w-8 h-8 rounded-lg gradient-voice flex items-center justify-center">
               <Mic className="w-4 h-4 text-white" />
             </div>
-            <span className="font-heading font-bold text-slate-900">VoiceAgent</span>
+            <span className="font-heading font-bold text-slate-900">BuchungsButler</span>
           </div>
           <p className="text-slate-500 text-sm">
-            © 2024 VoiceAgent. Alle Rechte vorbehalten.
+            © 2024 BuchungsButler. Alle Rechte vorbehalten.
           </p>
         </div>
       </footer>
