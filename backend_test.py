@@ -13,6 +13,8 @@ class VoiceAgentAPITester:
         self.admin_token = None
         self.tenant_id = None
         self.user_id = None
+        self.test_email = None
+        self.test_password = "TestPass123!"
         self.tests_run = 0
         self.tests_passed = 0
         self.test_results = []
