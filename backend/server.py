@@ -676,7 +676,7 @@ async def generate_invoice(
     
     # Generate invoice number
     invoice_count = await db.invoices.count_documents({})
-    invoice_number = f"VA-{datetime.now().year}-{invoice_count + 1:05d}"
+    invoice_number = f"BB-{datetime.now().year}-{invoice_count + 1:05d}"
     
     invoice_id = str(uuid.uuid4())
     now = datetime.now(timezone.utc).isoformat()
