@@ -500,7 +500,9 @@ class VoiceAgentAPITester:
         # Test sequence
         tests = [
             ("Root Endpoint", self.test_root_endpoint),
-            ("Authentication", self.test_register_tenant),
+            ("Tenant Registration", self.test_register_tenant),
+            ("Regular User Login", self.test_login),
+            ("Super Admin Login", self.test_super_admin_login),
             ("Current User Info", self.test_get_current_user),
             ("Dashboard Stats", self.test_get_stats),
             ("Tenant Operations", self.test_tenant_operations),
@@ -509,6 +511,9 @@ class VoiceAgentAPITester:
             ("Appointment Operations", self.test_appointment_operations),
             ("Voice Operations", self.test_voice_operations),
             ("Conversation History", self.test_conversation_history),
+            ("Admin Operations", self.test_admin_operations),
+            ("Pricing Management", self.test_pricing_management),
+            ("Usage and Invoicing", self.test_tenant_usage_and_invoicing),
         ]
         
         for test_name, test_func in tests:
