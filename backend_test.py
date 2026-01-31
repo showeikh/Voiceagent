@@ -469,6 +469,27 @@ class VoiceAgentAPITester:
             )
         
         return success1 and success2 and success3
+    def test_conversation_history(self):
+        """Test conversation history"""
+        if not self.token:
+            self.log_result("Conversation History", False, "No token available")
+            return False
+            
+        return self.run_test("Get Conversations", "GET", "conversations", 200)[0]
+
+    def test_tenant_usage_and_invoicing(self):
+        """Test tenant usage tracking and invoice generation"""
+        if not self.admin_token:
+            self.log_result("Usage and Invoicing", False, "No admin token available")
+            return False
+            
+        # Get all invoices
+        success1, _ = self.run_test("Get All Invoices", "GET", "admin/invoices", 200, use_admin_token=True)
+        
+        # Get telephony config
+        success2, _ = self.run_test("Get Telephony Config", "GET", "admin/telephony-config", 200, use_admin_token=True)
+        
+        return success1 and success2
 
     def run_all_tests(self):
         """Run all API tests"""
