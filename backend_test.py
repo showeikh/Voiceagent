@@ -123,13 +123,14 @@ class VoiceAgentAPITester:
 
     def test_login(self):
         """Test login with registered tenant"""
-        timestamp = datetime.now().strftime('%H%M%S')
-        
-        # First register a tenant
-        if not self.test_register_tenant():
+        # Use the tenant that was already registered in test_register_tenant
+        if not self.tenant_id:
+            self.log_result("Login Regular User", False, "No tenant registered")
             return False
             
-        # Now test login with same credentials
+        # Get the timestamp from when we registered
+        timestamp = datetime.now().strftime('%H%M%S')
+        
         login_data = {
             "email": f"test{timestamp}@example.com",
             "password": "TestPass123!"
@@ -145,7 +146,6 @@ class VoiceAgentAPITester:
         
         if success and 'access_token' in response:
             self.token = response['access_token']
-            self.tenant_id = response['tenant_id']
             self.user_id = response['user_id']
             print(f"   Token obtained: {self.token[:20]}...")
             print(f"   Tenant status: {response.get('tenant_status', 'unknown')}")
