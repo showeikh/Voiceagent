@@ -46,7 +46,7 @@ const PendingApproval = ({ status = 'pending' }) => {
           {config.description}
         </p>
         <div className="flex flex-col gap-3">
-          <a href="mailto:support@voiceagent.de">
+          <a href="mailto:support@buchungsbutler.de">
             <Button variant="outline" className="w-full">
               Support kontaktieren
             </Button>
