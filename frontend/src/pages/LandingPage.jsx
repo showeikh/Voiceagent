@@ -174,25 +174,25 @@ const LandingPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-6">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="glass rounded-3xl p-12 shadow-soft relative overflow-hidden">
+          <div className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-soft relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/5 via-transparent to-purple-500/5" />
             <div className="relative">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-3 sm:mb-4">
                 Bereit für intelligente Terminverwaltung?
               </h2>
-              <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto">
+              <p className="text-base sm:text-lg text-slate-600 mb-6 sm:mb-8 max-w-xl mx-auto">
                 Starten Sie kostenlos und erleben Sie, wie einfach Terminverwaltung per Sprache sein kann.
               </p>
               <Link to="/register">
                 <Button 
                   size="lg" 
-                  className="bg-violet-600 hover:bg-violet-700 text-white rounded-full px-10 h-14 text-lg shadow-glow hover:shadow-glow-lg transition-all hover:scale-105"
+                  className="bg-violet-600 hover:bg-violet-700 text-white rounded-full px-6 sm:px-10 h-12 sm:h-14 text-base sm:text-lg shadow-glow hover:shadow-glow-lg transition-all hover:scale-105"
                   data-testid="cta-register-btn"
                 >
                   Kostenlos registrieren
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </Link>
             </div>
@@ -201,7 +201,7 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-slate-200">
+      <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-slate-200">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg gradient-voice flex items-center justify-center">
