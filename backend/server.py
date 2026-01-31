@@ -44,7 +44,7 @@ SIPGATE_API_TOKEN = os.environ.get('SIPGATE_API_TOKEN', '')
 LEXOFFICE_API_KEY = os.environ.get('LEXOFFICE_API_KEY', '')
 
 # Create the main app
-app = FastAPI(title="Voice Agent SaaS Platform")
+app = FastAPI(title="BuchungsButler SaaS Platform")
 
 # Create router with /api prefix
 api_router = APIRouter(prefix="/api")
@@ -309,18 +309,18 @@ async def require_approved_tenant(current_user: TokenData = Depends(get_current_
 
 async def ensure_super_admin():
     """Create super admin if not exists"""
-    super_admin = await db.super_admins.find_one({"email": "admin@voiceagent.de"})
+    super_admin = await db.super_admins.find_one({"email": "admin@buchungsbutler.de"})
     if not super_admin:
         admin_id = str(uuid.uuid4())
         await db.super_admins.insert_one({
             "id": admin_id,
-            "email": "admin@voiceagent.de",
+            "email": "admin@buchungsbutler.de",
             "username": "Super Admin",
             "hashed_password": get_password_hash("admin123"),
             "is_active": True,
             "created_at": datetime.now(timezone.utc).isoformat()
         })
-        logger.info("Super Admin created: admin@voiceagent.de / admin123")
+        logger.info("Super Admin created: admin@buchungsbutler.de / admin123")
 
 @app.on_event("startup")
 async def startup_event():
@@ -770,7 +770,7 @@ async def send_invoice_to_lexoffice(invoice_id: str, current_user: TokenData = D
             "lineItems": [
                 {
                     "type": "custom",
-                    "name": f"Voice Agent Nutzung ({invoice['period_start'][:10]} - {invoice['period_end'][:10]})",
+                    "name": f"BuchungsButler Nutzung ({invoice['period_start'][:10]} - {invoice['period_end'][:10]})",
                     "description": f"{invoice['total_minutes']:.2f} Minuten",
                     "quantity": 1,
                     "unitName": "Stück",
@@ -1330,7 +1330,7 @@ async def get_dashboard_stats(current_user: TokenData = Depends(get_current_user
 # Root endpoint
 @api_router.get("/")
 async def root():
-    return {"message": "Voice Agent SaaS API", "version": "2.0.0"}
+    return {"message": "BuchungsButler SaaS API", "version": "2.0.0"}
 
 # Include router
 app.include_router(api_router)
