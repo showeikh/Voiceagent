@@ -407,10 +407,10 @@ const RegisterPage = () => {
           
           <div className="space-y-4">
             {[
-              'Mandantenfähig mit eigenen Bereichen',
-              'Abrechnung nach Minuten oder Paketen',
+              'KI-Telefonassistent für Ihre Firma',
+              '24/7 Erreichbarkeit für Ihre Kunden',
               'Google & Office 365 Kalender-Integration',
-              'Automatische Rechnungsstellung via Lexoffice'
+              'DSGVO-konforme Datenverarbeitung'
             ].map((benefit, index) => (
               <div key={index} className="flex items-center gap-3 text-slate-700">
                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
