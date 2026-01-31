@@ -149,32 +149,32 @@ const DashboardHome = () => {
   ];
 
   return (
-    <div className="space-y-8 animate-fade-in" data-testid="dashboard-home">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in" data-testid="dashboard-home">
       {/* Header */}
       <div>
-        <h1 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+        <h1 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
           Dashboard
         </h1>
-        <p className="text-slate-600 mt-1">
+        <p className="text-slate-600 mt-1 text-sm sm:text-base">
           Sprechen Sie mit dem Assistenten, um Ihre Termine zu verwalten
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
         {statCards.map((stat, index) => (
           <Card 
             key={index}
-            className="p-5 bg-white border border-slate-100 shadow-soft hover-lift"
+            className="p-3 sm:p-5 bg-white border border-slate-100 shadow-soft hover-lift"
             data-testid={`stat-${stat.label.toLowerCase()}`}
           >
-            <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-xl ${stat.bg} flex items-center justify-center`}>
-                <stat.icon className={`w-6 h-6 ${stat.color}`} />
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${stat.bg} flex items-center justify-center flex-shrink-0`}>
+                <stat.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.color}`} />
               </div>
-              <div>
-                <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
-                <p className="text-sm text-slate-500">{stat.label}</p>
+              <div className="min-w-0">
+                <p className="text-lg sm:text-2xl font-bold text-slate-900">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-slate-500 truncate">{stat.label}</p>
               </div>
             </div>
           </Card>
