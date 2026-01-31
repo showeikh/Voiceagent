@@ -94,11 +94,13 @@ class VoiceAgentAPITester:
     def test_register_tenant(self):
         """Test tenant registration"""
         timestamp = datetime.now().strftime('%H%M%S')
+        self.test_email = f"test{timestamp}@example.com"
+        
         test_data = {
             "company_name": f"Test Company {timestamp}",
             "contact_person": f"Test Person {timestamp}",
-            "email": f"test{timestamp}@example.com",
-            "password": "TestPass123!",
+            "email": self.test_email,
+            "password": self.test_password,
             "phone": "+49 30 12345678",
             "street": "Teststraße",
             "house_number": "123",
